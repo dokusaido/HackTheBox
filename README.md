@@ -1,17 +1,17 @@
 # :computer: Hack The Box :computer:
 
-
- const aussie = {
-   pronouns: "he" | "him",
-   completed: [Illumination, Chase],
-   OS: ["Kali", "Parrot", "CommandoVM"],
-   certs: {
-                        sans: "560"
-                              "530"
-                              "460"
-                              "415"
-                      },
-  challenge: "Gotta get the top of the :clinking_glasses: leader board :clinking_glasses: "
- }
+<dl>
+ <dd>const aussie = {
+   <dd>pronouns: "he" | "him",
+   <dd>completed: [Illumination, Chase],
+   <dd>OS: ["Kali", "Parrot", "CommandoVM"],
+   <dd>certs: {
+   <dd>                    sans: "560"
+   <dd>                          "530"
+   <dd>                          "460"
+   <dd>                          "415"
+   <dd>                   },
+  <dd>challenge: "Gotta get the top of the :clinking_glasses: leader board :clinking_glasses: "
+ <dd>}
 
 ### Please follow my adventures down the rabbit hole known as Hack The Box ! 
